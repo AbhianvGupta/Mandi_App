@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.android.mandi.viewModel.MandiViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvSeller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/tvSellerName"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/etSeller"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:autofillHints="name"
+            android:background="@drawable/round_et"
+            android:hint="@string/tvSellerName"
+            android:inputType="text"
+            android:padding="16dp"
+            android:text=""
+            android:onTextChanged="@{(s, start, before, count)->viewModel.onTextChanged(s, start, before, count)}"
+            app:layout_constraintBottom_toTopOf="@+id/tvLoyalty"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvSeller"
+            app:layout_constraintTop_toBottomOf="@+id/tvSeller" />
+
+        <TextView
+            android:id="@+id/tvLoyalty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:paddingTop="16dp"
+            android:text="@string/tvLoyalty"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etSeller" />
+
+        <EditText
+            android:id="@+id/etLoyalty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:autofillHints="phone"
+            android:background="@drawable/round_et"
+            android:hint="@string/tvLoyalty"
+            android:inputType="textEmailAddress"
+            android:padding="16dp"
+            android:onTextChanged="@{(s, start, before, count)->viewModel.onTextChangedS(s, start, before, count)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvLoyalty"
+            app:layout_constraintTop_toBottomOf="@+id/tvLoyalty" />
+
+        <TextView
+            android:id="@+id/tvVillage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/tvVillage"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etLoyalty" />
+
+        <EditText
+            android:id="@+id/spVillage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/round_et"
+            android:inputType="text"
+            android:padding="16dp"
+            android:hint="Village"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvVillage"
+            app:layout_constraintTop_toBottomOf="@+id/tvVillage" />
+
+        <TextView
+            android:id="@+id/tvGrossWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/tvGrossWeight"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spVillage" />
+<!--        android:entries="@{viewModel.getVillages()}"-->
+<!--        android:onItemSelected="@{(parent, view, position, id) -> viewModel.onVillageSelected(parent.getItemAtPosition(position))}"-->
+
+        <EditText
+            android:id="@+id/etGrossWeight"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:autofillHints="phone"
+            android:background="@drawable/round_et"
+            android:hint="@string/tvGrossWeight"
+            android:inputType="numberDecimal"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvGrossWeight"
+            app:layout_constraintTop_toBottomOf="@+id/tvGrossWeight" />
+
+        <TextView
+            android:id="@+id/tvGrossPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/tvGrossPrice"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etGrossWeight" />
+
+        <TextView
+            android:id="@+id/tvGrossTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{viewModel.price.toString()}"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etGrossWeight" />
+
+        <TextView
+            android:id="@+id/tvApplied"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/tvApplied"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvGrossPrice" />
+
+        <Button
+            android:id="@+id/btSellMyProduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text="@string/btSellMyProduce"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:onClick="@{() -> viewModel.calculatePrice(spVillage.getText().toString(), etGrossWeight.getText().toString(), etSeller.getText().toString())}"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

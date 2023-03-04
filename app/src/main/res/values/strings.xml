@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Jiva_Mandi_Abhinav</string>
+
+    <string name="tvSellerName">Seller Name</string>
+    <string name="tvLoyalty">Loyalty Card Identifier</string>
+    <string name="tvVillage">Village</string>
+    <string name="tvGrossWeight">Gross Weight</string>
+    <string name="tvGrossPrice">Gross Price</string>
+    <string name="tvGrossTotal">INR</string>
+    <string name="tvApplied">Applied Loyalty Index: </string>
+    <string name="btSellMyProduce">Sell My Produce</string>
+</resources>
