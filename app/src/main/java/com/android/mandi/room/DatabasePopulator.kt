@@ -23,7 +23,7 @@ class DatabasePopulator {
         val seller3 = SellerEntity("John Doe", "")
         db.mandiDao().insertSeller(seller1, seller2, seller3)
 
-        // Populate loyalty inde
+        // Populate loyalty index
         val index1 = LoyaltyIndexEntity("S18972", 1.12)
         val index2 = LoyaltyIndexEntity("S19031", 1.05)
         db.mandiDao().insertLoyaltyCard(index1, index2)
