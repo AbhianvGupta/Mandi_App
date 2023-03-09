@@ -1,65 +1,47 @@
 package com.android.mandi.repository
 
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import com.android.mandi.room.dao.MandiDao
-import com.android.mandi.room.entity.LoyaltyIndexEntity
-import com.android.mandi.room.entity.SellerEntity
-import com.android.mandi.room.entity.VillageEntity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class MandiRepository(private val dao: MandiDao) {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertVillage(village: VillageEntity) {
-        withContext(Dispatchers.IO) {
-            dao.insertVillage(village)
-        }
-    }
 
-    suspend fun insertSeller(seller: SellerEntity) {
-        withContext(Dispatchers.IO) {
-            dao.insertSeller(seller)
-        }
-    }
-
-    suspend fun insertLoyaltyCard(card: LoyaltyIndexEntity) {
-        withContext(Dispatchers.IO) {
-            dao.insertLoyaltyCard(card)
-        }
-    }
-
-    fun getSellerName():String{
+    // getting all sellers name
+    fun getSellerName(): String {
         return dao.getAllSellers().toString()
     }
 
-    fun getLoyaltyId():String{
+    // getting all loyalty card Id's
+    fun getLoyaltyId(): String {
         return dao.getAllIds().toString()
     }
 
 
-    fun getSellerNameById(sCardId: String?):String{
+    // getting seller's name according to card ID
+    fun getSellerNameById(sCardId: String?): String {
         return dao.getSellerNameByCardId(sCardId!!)
     }
 
-    fun getCardID(sellerName: String?): String{
+    // getting card Id according to sellers name
+    fun getCardID(sellerName: String?): String {
         return dao.getCardIDByName(sellerName!!)
     }
 
-    fun getLoyaltyIndex(sellerName: String?) : Double{
+    // getting loyalty Index, if the seller is registered else 0.98
+    fun getLoyaltyIndex(sellerName: String?): Double {
         val loyaltyCardId = dao.getSellerByName(sellerName ?: "")?.loyaltyCardId ?: ""
         val loyaltyCard = dao.getLoyaltyCardById(loyaltyCardId)
-        val loyaltyIndex = loyaltyCard?.loyaltyIndex ?: 0.98
-        return loyaltyIndex
+        return loyaltyCard?.loyaltyIndex ?: 0.98
     }
 
-    fun getPriceForProduce(villageName: String, weight: Double, sellerName: String?): Double {
+    // calculating the price according to weight(in kgs), getting loyalty index(by seller is registered or not)
+    // and price according to village name
+    fun getPriceForProduce(villageName: String, weight: Double, sellerName: String?): String {
         val village = dao.getVillageByName(villageName)
         val loyaltyCardId = dao.getSellerByName(sellerName ?: "")?.loyaltyCardId ?: ""
         val loyaltyCard = dao.getLoyaltyCardById(loyaltyCardId)
         val loyaltyIndex = loyaltyCard?.loyaltyIndex ?: 0.98
-        val price : Double = village?.price?: 0.0
+        val price: Double = village?.price ?: 0.0
 
-        return weight * loyaltyIndex * price
+        // price is set to two decimal precision points.
+        return String.format("%,.2f", weight * loyaltyIndex * price) + " INR"
     }
 }
